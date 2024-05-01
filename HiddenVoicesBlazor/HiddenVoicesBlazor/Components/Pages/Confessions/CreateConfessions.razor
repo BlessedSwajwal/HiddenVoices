@@ -2,6 +2,8 @@
 @using HiddenVoicesBlazor.API.Interface
 @inject IConfessionAPIService _confessionAPIService
 @inject NavigationManager Navigation
+@inject IJSRuntime JsRuntime
+@rendermode InteractiveServer
 
 <h3>Create Confessions</h3>
 
@@ -24,6 +26,8 @@
     string? title { get; set; }
     [SupplyParameterFromForm]
     string? message { get; set; }
+    string? confessionId;
+    string? secretKey;
 
     void writer()
     {
@@ -33,7 +37,19 @@
     async Task CreateConfession()
     {
         var response = await _confessionAPIService.CreateConfession(title, message);
-        Console.WriteLine(response);
-        Navigation.NavigateTo("confessions");
+
+        confessionId = response.id.ToString();
+        secretKey = response.secretKey;
+        
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (string.IsNullOrEmpty(confessionId) && string.IsNullOrEmpty(secretKey))
+        {
+            return;
+        }
+        await JsRuntime.InvokeVoidAsync("WriteCookie.WriteCookie", confessionId, secretKey, DateTime.Now.AddDays(10));
+        Navigation.NavigateTo($"credentials?confessionId={confessionId}");
     }
 }

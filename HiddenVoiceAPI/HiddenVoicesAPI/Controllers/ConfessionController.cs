@@ -19,11 +19,12 @@ public class ConfessionController(ISender _mediator) : ControllerBase
         return response.Match(
                 confession =>
                 {
-                    var cookieOptions = new CookieOptions
+                    var co = new CookieOptions()
                     {
-                        Expires = DateTimeOffset.UtcNow.AddDays(10)
+                        HttpOnly = false,
+                        Secure = false
                     };
-                    Response.Cookies.Append(confession.Id.ToString(), confession.SecretKey, cookieOptions);
+                    Response.Cookies.Append("hello", "sir", co);
                     return Ok(confession);
                 },
                 error => Problem(statusCode: error.StatusCode, detail: error.ErrorMessage));
