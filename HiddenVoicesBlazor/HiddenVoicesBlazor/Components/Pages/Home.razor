@@ -1,7 +1,165 @@
 ﻿@page "/"
+@layout Layout.EmptyLayout
+@using System.Linq
 
-<PageTitle>Home</PageTitle>
+@* Set background image *@
 
-<h1>Hello, world!</h1>
+<div class="text-center" id="body">
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">Hidden Voices</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link" href="#">Features</a>
+            <a class="nav-link" href="#">Contact</a>
+          </nav>
+        </div>
+      </header>
 
-Welcome to your new app.
+      <main role="main" class="inner cover">
+            <img src="https://scontent.fhio3-1.fna.fbcdn.net/o1/v/t0/f1/m247/3066793859711297312_3391116903_01-05-2024-04-48-17.jpeg?_nc_ht=scontent.fhio3-1.fna.fbcdn.net&_nc_cat=110&ccb=9-4&oh=00_AfDqBEcgKVzPdu0m6IDQ3IsOLKkv2e7TIRW0j6gZ81MtgA&oe=66341277&_nc_sid=5b3566" alt="Main Image" height="300px" width="500px" style="object-fit: cover; border-radius: 20px" class="p-2"/>
+        <h1 class="cover-heading">Hidden Voices.</h1>
+            <p class="lead fs-3 lh-sm">No secrets too dark, no stories untold. Unleash your voice, find connection in the shadows.</p>
+            <p class="p-2 desc">In the hidden corners of the web, where secrets whisper and stories unfold, lies a space for anonymous confession. Unleash your voice, find connection in the shadows, and let the truth resonate.</p>
+        <p class="lead">
+          <a href="/confessions" class="btn btn-lg btn-secondary">Enter</a>
+        </p>
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>Hidden Voices, an Anonymous Confession Board by <a href="https://github.com/BlessedSwajwal">@@BlessedSwajwal</a>.</p>
+        </div>
+      </footer>
+    </div>
+
+    <style>
+        /*
+ * Globals
+ */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: #fff;
+}
+
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #fff;
+  border: .05rem solid #fff;
+}
+
+.desc {
+            color: #FFFFE0
+}
+
+/*
+ * Base structure
+ */
+
+html,
+#body {
+  height: 100vh;
+  background-color: #333;
+  width: 100vw;
+}
+
+#body {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-pack: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  color: #fff;
+  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+}
+
+.cover-container {
+  max-width: 42em;
+}
+
+
+/*
+ * Header
+ */
+.masthead {
+  margin-bottom: 2rem;
+}
+
+.masthead-brand {
+  margin-bottom: 0;
+}
+
+.nav-masthead .nav-link {
+  padding: .25rem 0;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .5);
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+@@media (min-width: 48em) {
+  .masthead-brand {
+    float: left;
+  }
+  .nav-masthead {
+    float: right;
+  }
+}
+
+
+/*
+ * Cover
+ */
+.cover {
+  padding: 0 1.5rem;
+}
+.cover .btn-lg {
+  padding: .75rem 1.25rem;
+  font-weight: 700;
+}
+
+
+/*
+ * Footer
+ */
+.mastfoot {
+  color: rgba(255, 255, 255, .5);
+}
+    </style>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+</div>
+
+
+@code {
+
+}
