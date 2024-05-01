@@ -5,4 +5,6 @@ public interface IConfessionRepository
 {
     Task Add(Confession confession);
     Task<List<Confession>> GetPaged(int offest, int count);
+
+    Task<Confession> GetByIdAsync(Guid id);
 }

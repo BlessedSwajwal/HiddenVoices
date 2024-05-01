@@ -13,6 +13,11 @@ public class ConfessionAPIService(HttpClient _httpClient) : IConfessionAPIServic
         var response = await _httpClient.GetFromJsonAsync<List<ConfessionResponse>>($"https://localhost:7122/api/Confession/All?offset={offset}&count={count}");
         return response;
     }
+    public async Task<ConfessionResponse> GetConfessionDetail(Guid confessionId)
+    {
+        var response = await _httpClient.GetFromJsonAsync<ConfessionResponse>($"https://localhost:7122/api/Confession/Detail?confessionId={confessionId}");
+        return response;
+    }
 
     public async Task<ConfessionWithSecret> CreateConfession(string title, string message)
     {

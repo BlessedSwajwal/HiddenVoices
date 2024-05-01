@@ -1,0 +1,77 @@
+﻿@page "/confession-detail"
+@using HiddenVoicesBlazor.API.Interface
+@using HiddenVoicesBlazor.Data
+@using System.Globalization
+@inject IConfessionAPIService ConfessionAPIService
+
+<h3>Detail</h3>
+
+@if(ConfessionData is not null)
+{
+
+<div class="confession-card card mb-3 shadow">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0">@ConfessionData.title</h5>
+        <div class="vote-count d-flex gap-2 align-items-center">
+            <div>
+                <i class="bi bi-hand-thumbs-up-fill"></i>
+                @* <span>@ConfessionData.upvotes</span> *@
+                <span>1023</span>
+            </div>
+            <div>
+                <i class="bi bi-hand-thumbs-down-fill"></i>
+                @* <span>@ConfessionData.downvotes</span> *@
+                    <span>423</span>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <p class="card-text">@ConfessionData.message</p>
+        <div class="card-footer text-muted">
+            <small>Created: @ConfessionData.createdAt.ToString("MMMM d, yyyy h:mm tt", CultureInfo.InvariantCulture)</small>
+            <small class="float-end">Modified: @ConfessionData.modifiedAt.ToString("MMMM d, yyyy h:mm tt", CultureInfo.InvariantCulture)</small>
+        </div>
+    </div>
+    </div>
+} else
+{
+    <h3>Error while displaying data.</h3>
+}
+
+<style scoped>
+    .confession-card {
+        border-radius: 1rem;
+        background-color: #f8f9fa;
+    }
+
+    .vote-count {
+        font-size: 1.2rem;
+    }
+
+    .material-icons {
+        font-size: 1.5rem;
+        vertical-align: middle;
+    }
+
+    .card-text {
+        font-size: 1rem;
+    }
+
+    .card-footer small {
+        font-size: 0.8rem;
+    }
+</style>
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "confessionId")]
+    public Guid ConfessionId { get; set; }
+
+    ConfessionResponse? ConfessionData; 
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var response = await ConfessionAPIService.GetConfessionDetail(ConfessionId);
+        ConfessionData = response;
+    }
+}

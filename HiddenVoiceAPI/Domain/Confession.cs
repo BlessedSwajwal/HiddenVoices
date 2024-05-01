@@ -1,6 +1,7 @@
 ﻿namespace Domain;
 public class Confession
 {
+    public static Confession Empty = new Confession();
     private Confession(Guid id, string title, string message, string secretKey, int upvotes, int downVotes, DateTime createdAt, DateTime modifiedAt)
     {
         Id = id;
@@ -26,4 +27,6 @@ public class Confession
     {
         return new(Guid.NewGuid(), title, message, Guid.NewGuid().ToString(), 0, 0, DateTime.Now, DateTime.Now);
     }
+
+    private Confession() { }
 }

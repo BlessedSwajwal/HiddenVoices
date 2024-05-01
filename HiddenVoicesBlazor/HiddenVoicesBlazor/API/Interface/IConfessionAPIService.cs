@@ -5,5 +5,6 @@ namespace HiddenVoicesBlazor.API.Interface;
 public interface IConfessionAPIService
 {
     Task<ConfessionWithSecret> CreateConfession(string title, string message);
+    Task<ConfessionResponse> GetConfessionDetail(Guid confessionId);
     Task<List<ConfessionResponse>> GetConfessionResponses(int offest, int count);
 }

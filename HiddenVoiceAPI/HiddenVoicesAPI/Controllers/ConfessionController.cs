@@ -1,4 +1,5 @@
 ﻿using Application.Confessions.Command.Create;
+using Application.Confessions.Query.ConfessionDetail;
 using Application.Confessions.Query.GetPagedConfessions;
 using HiddenVoicesAPI.Requests;
 using MediatR;
@@ -19,12 +20,7 @@ public class ConfessionController(ISender _mediator) : ControllerBase
         return response.Match(
                 confession =>
                 {
-                    var co = new CookieOptions()
-                    {
-                        HttpOnly = false,
-                        Secure = false
-                    };
-                    Response.Cookies.Append("hello", "sir", co);
+
                     return Ok(confession);
                 },
                 error => Problem(statusCode: error.StatusCode, detail: error.ErrorMessage));
@@ -33,12 +29,23 @@ public class ConfessionController(ISender _mediator) : ControllerBase
     [HttpGet("All")]
     public async Task<IActionResult> GetPagedConfessions(int offset, int count)
     {
-        var res = Request;
         var query = new GetPagedConfessionsQuery(offset, count);
         var response = await _mediator.Send(query);
 
         return response.Match(
             confessions => Ok(confessions),
+            error => Problem(statusCode: error.StatusCode, detail: error.ErrorMessage)
+            );
+    }
+
+    [HttpGet("Detail")]
+    public async Task<IActionResult> GetConfessionDetail([FromQuery] Guid confessionId)
+    {
+        var query = new GetConfessionDetailQuery(confessionId);
+        var response = await _mediator.Send(query);
+
+        return response.Match(
+            confession => Ok(confession),
             error => Problem(statusCode: error.StatusCode, detail: error.ErrorMessage)
             );
     }
