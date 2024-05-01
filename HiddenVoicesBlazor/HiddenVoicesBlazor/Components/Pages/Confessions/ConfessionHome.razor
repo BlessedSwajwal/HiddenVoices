@@ -2,22 +2,24 @@
 @using HiddenVoicesBlazor.API.Interface
 @using HiddenVoicesBlazor.Data
 @inject IConfessionAPIService _confessionAPIService
-<h3>Confessions</h3>
-<NavLink href="/confess"> <button type="button" class="btn btn-primary">Confess</button></NavLink>
 
+<div class="d-flex flex-column justify-content-between align-items-center text-white">
+<h3>Confessions</h3>
+<NavLink href="/confess"> <button type="button" class="btn btn-primary rounded-pill px-5 py-3">Confess</button></NavLink>
+</div>
 <div class="row gx-4 gx-lg-5 justify-content-center">
-    <div class="col-md-10 col-lg-8 col-xl-7">
+    <div >
         <div class="p-3">
             @if (Confessions != null)
             {
                 @foreach (var confession in Confessions)
                 {
-                    <div class="card mb-3 shadow-sm">
+                    <div class="card mb-3 shadow-sm" style="background-color: #E2DFD0">
                         <div class="card-body">
-                            <h5 class="card-title text-center">@confession.title</h5>
+                            <NavLink href=@($"/confession-detail?confessionId={confession.id}")><h5 class="card-title text-center">@confession.title</h5></NavLink>
                             <p class="text-justify">@confession.message</p>
 
-                            <div class="card-text mt-3 d-flex gap-3">
+                            <div class="card-text mt-3 d-flex gap-5">
                                 <div>
                                     @confession.upvotes <i class="bi bi-hand-thumbs-up-fill"></i>
                                 </div>
