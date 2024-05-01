@@ -1,0 +1,13 @@
+@BaseAddress=https://localhost:7122/api
+
+POST {{BaseAddress}}/Confession/Create
+Content-Type: application/json
+
+{
+  "title": "The Dog Walker with a Secret Identity",
+  "message": "By day, I'm Mildred Butterworth, mild-mannered accountant. But during my afternoon walks with Fido, the poodle entrusted to my care, I transform. Disguised in a trench coat and fedora, I become \"The Neighborhood Whisperer,\" solving petty mysteries that plague our quiet suburban streets. From the case of the missing garden gnomes to the whodunit of the misplaced recycling bins, I utilize Fido's keen nose and my surprisingly good deduction skills to crack the case. No one suspects a thing, not even Fido (who gets an extra treat for each solved mystery). The thrill of the secret life keeps me young, but the guilt of keeping Mildred and \"The Whisperer\" separate is starting to weigh heavy. Maybe it's time to combine my skills and become the world's first canine-assisted accountant/neighborhood detective agency."
+}
+
+###########
+
+GET {{BaseAddress}}/Confession/All?offset=0&count=10

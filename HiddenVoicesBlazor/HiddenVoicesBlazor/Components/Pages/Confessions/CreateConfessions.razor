@@ -1,0 +1,39 @@
+﻿@page "/confess"
+@using HiddenVoicesBlazor.API.Interface
+@inject IConfessionAPIService _confessionAPIService
+@inject NavigationManager Navigation
+
+<h3>Create Confessions</h3>
+
+<form method="post" @onsubmit="CreateConfession" @formname="CreateConfessionForm">
+    <AntiforgeryToken />
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Title</label>
+        <InputText  @bind-Value="title" class="form-control p-2" id="exampleFormControlInput1" />
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Confession</label>
+        <InputTextArea class="form-control" id="exampleFormControlTextarea1" style="height: 200px" @bind-Value="message" />
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg" @onclick="writer">Confess</button>
+</form>
+
+@code {
+    [SupplyParameterFromForm]
+    string? title { get; set; }
+    [SupplyParameterFromForm]
+    string? message { get; set; }
+
+    void writer()
+    {
+        Console.WriteLine("Hello");
+    }
+
+    async Task CreateConfession()
+    {
+        var response = await _confessionAPIService.CreateConfession(title, message);
+        Console.WriteLine(response);
+        Navigation.NavigateTo("confessions");
+    }
+}
