@@ -20,6 +20,7 @@ public static class DependencyRegister
 
         //Repos
         services.AddScoped<IConfessionRepository, ConfessionRepository>();
+        services.AddScoped<IReplyRepository, ReplyRepository>();
 
         return services;
     }

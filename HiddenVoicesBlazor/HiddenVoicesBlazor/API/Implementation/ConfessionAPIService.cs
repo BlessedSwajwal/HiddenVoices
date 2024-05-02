@@ -38,4 +38,23 @@ public class ConfessionAPIService(HttpClient _httpClient) : IConfessionAPIServic
         var confession = await response.Content.ReadFromJsonAsync<ConfessionWithSecret>();
         return confession;
     }
+
+    public async Task<string> AddComment(Guid confessionId, string message, Guid? parentReply)
+    {
+        var data = new
+        {
+            comment = message
+        };
+        var json = JsonSerializer.Serialize(data);
+        var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var response = await _httpClient.PostAsync($"https://localhost:7122/api/Confession/Comment?confessionId={confessionId}", stringContent);
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception("error creating comment");
+        }
+
+        var secretKey = JsonDocument.Parse(response.Content.ReadAsStream()).RootElement.GetProperty("secretKey").GetString();
+        return secretKey;
+    }
 }
